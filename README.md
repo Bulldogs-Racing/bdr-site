@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-Website build for Yale's FSAE team, Bulldogs Racing.
+Website built for Yale's FSAE team, Bulldogs Racing. Currently has around 5 pages with image content from the old site. Heavily subject to change as branding is developed.
 
 ## React Compiler
 
