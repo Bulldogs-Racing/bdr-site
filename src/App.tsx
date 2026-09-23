@@ -197,9 +197,12 @@ function App() {
           </svg>
           <div className="track-scene__caption">
             <h2 className="track-scene__model">BR25</h2>
-            <p className="track-scene__description">Our latest all-electric Formula SAE car.</p>
-            <p className="track-scene__result"><strong>6th overall</strong> · out of 21</p>
-            <p className="track-scene__result">One of just 4 cars to complete every event.</p>
+            <p className="track-scene__description">
+              Our latest all-electric Formula SAE car, designed and built by
+              Yale students.
+            </p>
+            <p className="track-scene__result">BR25 finished <strong>6th overall out of 21 teams</strong>.</p>
+            <p className="track-scene__result">It was one of just four cars to complete every event.</p>
           </div>
           <svg className="track-scene__artwork track-scene__car-layer" viewBox="0 0 1536 1024"
             preserveAspectRatio="xMidYMid slice" aria-hidden="true">

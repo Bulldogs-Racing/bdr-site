@@ -18,7 +18,7 @@ export default function SponsorshipPage() {
           <p>Support the next generation of engineering leaders by becoming a sponsor.</p>
           <div className="sponsorship-page__actions">
             <a className="sponsorship-page__button" href="mailto:bulldogsracing@yale.edu">
-              Email us at bulldogsracing@yale.edu<span aria-hidden="true">↗</span>
+              <span aria-hidden="true">Contact us ↗</span>
             </a>
             <a className="sponsorship-page__packet" href={sponsorshipPacket.url}>
               {sponsorshipPacket.label} (PDF) <span aria-hidden="true">↗</span>

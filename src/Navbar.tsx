@@ -10,6 +10,7 @@ export default function Navbar() {
       <a href="/history">History</a>
       <a href="/sponsors">Sponsorship</a>
       <a href="/about">About</a>
+      <a className="navbar__contact" href="mailto:bulldogsracing@yale.edu">Contact</a>
     </nav>
   )
 }

@@ -6,7 +6,7 @@
 
 .history-page__nav {
   position: relative;
-  min-height: 140px;
+  min-height: 112px;
   background: #002340;
 }
 
@@ -19,7 +19,7 @@
 .history-page__title-card {
   position: sticky;
   top: 0;
-  height: max(560px, calc(100svh - 140px));
+  height: max(560px, calc(100svh - 112px));
   isolation: isolate;
   background: #002340;
   color: #fff;
@@ -241,6 +241,6 @@
 
 @media (max-width: 600px) {
   .history-page__nav {
-    min-height: 180px;
+    min-height: 148px;
   }
 }
