@@ -1,0 +1,245 @@
+.team-page {
+  background: #e8eef7;
+  color: #002340;
+  font-family: Arial, sans-serif;
+}
+
+.team-page__hero {
+  position: relative;
+  background: #002340;
+  color: #fff;
+}
+
+.team-page__group {
+  display: block;
+  width: 100%;
+  height: clamp(460px, 80svh, 1000px);
+  object-fit: cover;
+  object-position: center 65%;
+}
+
+.team-page__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 35, 64, 0.75), transparent 32%, transparent 64%, rgba(0, 35, 64, 0.85));
+  pointer-events: none;
+}
+
+.team-page__hero-copy {
+  position: absolute;
+  z-index: 1;
+  bottom: clamp(24px, 4vw, 64px);
+  left: clamp(24px, 5vw, 80px);
+  right: 24px;
+}
+
+.team-page__eyebrow {
+  margin: 0 0 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.team-page__hero h1 {
+  margin: 0;
+  font-size: clamp(60px, 9vw, 144px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.team-page__intro,
+.team-page__sections,
+.team-page__directory,
+.team-page__footer {
+  padding-inline: clamp(24px, 5vw, 80px);
+}
+
+.team-page__intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 8vw;
+  padding-block: clamp(48px, 7vw, 104px) 40px;
+}
+
+.team-page__intro h2 {
+  max-width: 600px;
+  margin: 0;
+  font-size: clamp(32px, 4vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+.team-page__intro > p {
+  align-self: center;
+  max-width: 640px;
+  margin: 0;
+  color: #212121;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.team-page__sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+  padding-block: 16px 40px;
+}
+
+.team-page__sections a {
+  display: inline-flex;
+  gap: 20px;
+  padding-block: 10px;
+  border-bottom: 1px solid #066bd1;
+  color: #002340;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.team-page a:focus-visible {
+  outline: 2px solid #066bd1;
+  outline-offset: 5px;
+}
+
+.team-section {
+  padding-block: 40px 64px;
+  scroll-margin-top: 24px;
+}
+
+.team-section__header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding-top: 24px;
+  margin-bottom: 32px;
+  border-top: 1px solid rgba(0, 35, 64, 0.25);
+}
+
+.team-section__header > span {
+  color: #066bd1;
+  font-size: 14px;
+}
+
+.team-section__header h2 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 56px);
+  letter-spacing: -0.045em;
+}
+
+.team-section__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-member {
+  background: #fff;
+}
+
+.team-member > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 25%;
+  background: #03366a;
+}
+
+.team-member__copy {
+  padding: 24px;
+  border-top: 5px solid;
+  border-image: linear-gradient(to right, #03366a 0% 33.33%, #066bd1 33.33% 66.66%, #e8eef7 66.66% 100%) 1;
+}
+
+.team-member__role {
+  margin: 0 0 10px;
+  color: #03366a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.team-member h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(20px, 1.8vw, 28px);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.team-member a {
+  display: inline-block;
+  margin-top: 20px;
+  color: #03366a;
+  font-size: 13px;
+  text-underline-offset: 4px;
+}
+
+.team-page__footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+  padding-block: 48px;
+  background: #002340;
+  color: #e8eef7;
+}
+
+.team-page__footer p {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -0.025em;
+}
+
+.team-page__footer a {
+  color: inherit;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+  text-underline-offset: 5px;
+}
+
+@media (max-width: 1000px) {
+  .team-section__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .team-page__group {
+    height: auto;
+    min-height: 0;
+    padding-top: 180px;
+  }
+
+  .team-page__hero-copy {
+    position: relative;
+    inset: auto;
+    padding: 24px;
+  }
+
+  .team-page__hero::after {
+    display: none;
+  }
+
+  .team-page__intro {
+    grid-template-columns: 1fr;
+  }
+
+  .team-section__grid {
+    gap: 24px 16px;
+  }
+
+  .team-member__copy {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .team-section__grid {
+    grid-template-columns: 1fr;
+  }
+}

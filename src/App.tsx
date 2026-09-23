@@ -14,7 +14,7 @@ import websiteVideo from './assets/WebsiteVideo.mp4'
 import whiteLogo from './assets/white logo no background.png'
 import './App.css'
 
-const statTargets = [96, 88, 74]
+const introSeenKey = 'bdr-intro-seen'
 const historySlides = [
   {
     year: '2007',
@@ -61,27 +61,43 @@ const historySlides = [
 ]
 
 function App() {
-  const [introComplete, setIntroComplete] = useState(false)
+  const [introComplete, setIntroComplete] = useState(() => {
+    try {
+      return localStorage.getItem(introSeenKey) === 'true'
+    } catch {
+      return false
+    }
+  })
+  const [introVisible, setIntroVisible] = useState(!introComplete)
   const carRef = useRef<SVGGElement>(null)
   const trackFrameRef = useRef<HTMLDivElement>(null)
-  const statsRef = useRef<HTMLDivElement>(null)
-  const [numbersStarted, setNumbersStarted] = useState(false)
-  const [statValues, setStatValues] = useState([0, 0, 0])
-  const [activeHistorySlide, setActiveHistorySlide] = useState(0)
   const sceneRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIntroComplete(true), 1600)
+    if (!introVisible) return
 
-    return () => window.clearTimeout(timer)
-  }, [])
+    const timer = window.setTimeout(() => setIntroComplete(true), 1600)
+    const exitTimer = window.setTimeout(() => {
+      setIntroVisible(false)
+      try {
+        localStorage.setItem(introSeenKey, 'true')
+      } catch {
+        // The splash still completes when browser storage is unavailable.
+      }
+    }, 2000)
+
+    return () => {
+      window.clearTimeout(timer)
+      window.clearTimeout(exitTimer)
+    }
+  }, [introVisible])
 
   useEffect(() => {
-    document.documentElement.classList.toggle('intro-active', !introComplete)
+    document.documentElement.classList.toggle('intro-active', introVisible)
 
     return () => document.documentElement.classList.remove('intro-active')
-  }, [introComplete])
+  }, [introVisible])
 
   useEffect(() => {
     if (introComplete) {
@@ -93,9 +109,6 @@ function App() {
     let frameId = 0
     let progress = 0
     let previousTime = 0
-    let autoplayStart: number | null = null
-    let entered = false
-    const narrow = window.matchMedia('(max-width: 767px)')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
     const updateCarPosition = (now: number) => {
@@ -106,31 +119,32 @@ function App() {
 
       const elapsed = previousTime ? Math.min(now - previousTime, 64) : 16
       previousTime = now
-      let target = Math.min(Math.max(
-        -scene.getBoundingClientRect().top / Math.max(scene.offsetHeight - frame.offsetHeight, 1),
+      const animationDistance = scene.offsetHeight - frame.offsetHeight
+      const target = Math.min(Math.max(
+        -scene.getBoundingClientRect().top / Math.max(animationDistance, 1),
         0,
       ), 1)
 
-      if (narrow.matches) {
-        if (entered && autoplayStart === null) autoplayStart = now
-        const time = autoplayStart === null ? 0 : Math.min((now - autoplayStart) / 1700, 1)
-        target = time * time * (3 - 2 * time)
-      }
-
-      progress = reducedMotion.matches ? 1 : narrow.matches
-        ? target
+      progress = reducedMotion.matches ? target
         : progress + (target - progress) * (1 - Math.exp(-elapsed / 100))
       if (Math.abs(target - progress) < 0.0001) progress = target
-      const inverse = 1 - progress
+      // Let the car settle before fading in a stationary caption above it.
+      const carProgress = reducedMotion.matches ? 1 : Math.min(progress / 0.55, 1)
+      const captionProgress = reducedMotion.matches ? 1 : Math.min(Math.max((progress - 0.62) / 0.16, 0), 1)
+      frame.style.setProperty('--caption-opacity', `${captionProgress * captionProgress * (3 - 2 * captionProgress)}`)
+      // Account for the SVG's centered crop when positioning above the parked car.
+      const scale = Math.max(frame.clientWidth / 1536, frame.clientHeight / 1024)
+      const parkedCarTop = (frame.clientHeight - 1024 * scale) / 2 + 460 * scale
+      frame.style.setProperty('--parked-car-top', `${parkedCarTop}px`)
+      const inverse = 1 - carProgress
       // Tire contact point follows a cubic spline in the background's 1536 × 1024 space.
-      const x = inverse ** 3 * 1850 + 3 * inverse ** 2 * progress * 1450 +
-        3 * inverse * progress ** 2 * 1050 + progress ** 3 * 768
-      const y = inverse ** 3 * 880 + 3 * inverse ** 2 * progress * 850 +
-        3 * inverse * progress ** 2 * 700 + progress ** 3 * 700
+      const x = inverse ** 3 * 1850 + 3 * inverse ** 2 * carProgress * 1450 +
+        3 * inverse * carProgress ** 2 * 1050 + carProgress ** 3 * 768
+      const y = inverse ** 3 * 880 + 3 * inverse ** 2 * carProgress * 850 +
+        3 * inverse * carProgress ** 2 * 700 + carProgress ** 3 * 700
       carRef.current.setAttribute('transform', `translate(${x} ${y})`)
 
-      if (!reducedMotion.matches && (progress !== target ||
-        (narrow.matches && entered && target < 1))) {
+      if (!reducedMotion.matches && progress !== target) {
         frameId = window.requestAnimationFrame(updateCarPosition)
       }
     }
@@ -139,14 +153,6 @@ function App() {
       if (!frameId) frameId = window.requestAnimationFrame(updateCarPosition)
     }
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        entered = true
-        requestUpdate()
-        observer.disconnect()
-      }
-    }, { threshold: 0.65 })
-    if (trackFrameRef.current) observer.observe(trackFrameRef.current)
     requestUpdate()
     window.addEventListener('scroll', requestUpdate, { passive: true })
     window.addEventListener('resize', requestUpdate)
@@ -154,58 +160,11 @@ function App() {
 
     return () => {
       window.cancelAnimationFrame(frameId)
-      observer.disconnect()
       window.removeEventListener('scroll', requestUpdate)
       window.removeEventListener('resize', requestUpdate)
       reducedMotion.removeEventListener('change', requestUpdate)
     }
   }, [])
-
-  useEffect(() => {
-    const stats = statsRef.current
-    if (!stats) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setNumbersStarted(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.2 },
-    )
-
-    observer.observe(stats)
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!numbersStarted) return
-
-    let frameId = 0
-    const startedAt = performance.now()
-    const duration = 550
-
-    const countUp = (now: number) => {
-      const progress = Math.min((now - startedAt) / duration, 1)
-      const easedProgress = 1 - (1 - progress) ** 4
-
-      setStatValues(statTargets.map((target) => Math.round(target * easedProgress)))
-
-      if (progress < 1) frameId = window.requestAnimationFrame(countUp)
-    }
-
-    frameId = window.requestAnimationFrame(countUp)
-
-    return () => window.cancelAnimationFrame(frameId)
-  }, [numbersStarted])
-
-  const moveHistorySlide = (direction: -1 | 1) => {
-    setActiveHistorySlide((current) =>
-      (current + direction + historySlides.length) % historySlides.length,
-    )
-  }
 
   return (
     <main className="home">
@@ -223,30 +182,31 @@ function App() {
           <source src={websiteVideo} type="video/mp4" />
         </video>
         <div className="home__hero-copy">
-          <h1>Bulldogs Racing</h1>
-          <p>Formula SAE @ Yale University, est. 2006</p>
+          <h1>Bulldogs Racing <span className="home__established">est. 2006</span></h1>
+          <p>Formula SAE @ <span className="home__yale">Yale University</span></p>
         </div>
       </section>
       <section
         ref={sceneRef}
-        className={`track-scene${numbersStarted ? ' track-scene--active' : ''}`}
+        className="track-scene"
       >
         <div ref={trackFrameRef} className="track-scene__frame">
           <svg className="track-scene__artwork" viewBox="0 0 1536 1024"
             preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <image href={background} className="track-scene_car" width="1536" height="1024" />
+          </svg>
+          <div className="track-scene__caption">
+            <h2 className="track-scene__model">BR25</h2>
+            <p className="track-scene__description">Our latest all-electric Formula SAE car.</p>
+            <p className="track-scene__result"><strong>6th overall</strong> · out of 21</p>
+            <p className="track-scene__result">One of just 4 cars to complete every event.</p>
+          </div>
+          <svg className="track-scene__artwork track-scene__car-layer" viewBox="0 0 1536 1024"
+            preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g ref={carRef} transform="translate(1850 880)">
               <image href={car} x="-220" y="-240" width="440" height="250" />
             </g>
           </svg>
-          <div ref={statsRef} className="track-stats" aria-label="bdr by the numbers">
-            <p className="track-stats__eyebrow">bdr by the numbers</p>
-            <div className="track-stats__bar">
-              {statValues.map((value, index) => (
-                <span key={statTargets[index]}>{value}%</span>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
       <section id="history" className="history" aria-labelledby="history-title">
@@ -255,14 +215,12 @@ function App() {
           <h2 id="history-title">History</h2>
         </header>
         <div className="history-carousel">
-          <div className="history-carousel__viewport">
-            <div
-              className="history-carousel__track"
-              style={{ transform: `translateX(-${activeHistorySlide * 100}%)` }}
-            >
+          <div className="history-carousel__viewport" role="region"
+            aria-label="Team history photos, scroll horizontally" tabIndex={0}>
+            <div className="history-carousel__track">
               {historySlides.map((slide) => (
                 <article className="history-carousel__slide" key={slide.year} tabIndex={0}>
-                  <img src={slide.image} alt={slide.alt} />
+                  <img src={slide.image} alt={slide.alt} loading="lazy" />
                   <div className="history-carousel__details">
                     <p>{slide.year}</p>
                     <ul>
@@ -275,17 +233,7 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="history-carousel__controls">
-            <button type="button" onClick={() => moveHistorySlide(-1)} aria-label="Previous history image">
-              Previous
-            </button>
-            <p aria-live="polite">
-              {activeHistorySlide + 1} / {historySlides.length}
-            </p>
-            <button type="button" onClick={() => moveHistorySlide(1)} aria-label="Next history image">
-              Next
-            </button>
-          </div>
+          <p className="history-carousel__hint">Scroll to explore <span aria-hidden="true">→</span></p>
         </div>
       </section>
       <section id="sponsorship" className="sponsor-callout" aria-labelledby="sponsor-title">
@@ -315,7 +263,7 @@ function App() {
           </p>
         </div>
       </section>
-      <div
+      {introVisible && <div
         className={`intro-splash${introComplete ? ' intro-splash--leaving' : ''}`}
         aria-hidden="true"
       >
@@ -323,7 +271,7 @@ function App() {
         <div className="intro-splash__ripple intro-splash__ripple--one"></div>
         <div className="intro-splash__ripple intro-splash__ripple--two"></div>
         <img className="intro-splash__logo" src={whiteLogo} alt="" />
-      </div>
+      </div>}
     </main>
   )
 }

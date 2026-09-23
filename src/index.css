@@ -10,11 +10,19 @@ html::-webkit-scrollbar {
   display: none;
 }
 
-html.intro-active {
+html.intro-active,
+html.intro-active body {
   overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  font-family: Arial, sans-serif;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
