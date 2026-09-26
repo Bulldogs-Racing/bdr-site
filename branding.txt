@@ -1,0 +1,46 @@
+Primary
+
+Yale Blue
+PMS 289
+RGB 0, 35, 64
+CMYK 100, 75, 8, 40
+#002340
+
+Accents
+
+Marine Blue (similar)
+RGB 3, 54, 106
+CMYK 97, 49, 0, 58
+#03366A
+
+Celtic Blue
+RGB 6, 107, 209
+CMYK 97, 49, 0, 18
+#066BD1
+
+Monochrome
+
+Eerie Black
+RGB 33, 33, 33
+CMYK 0, 0, 0, 87
+#212121
+
+Alice Blue
+RGB 232, 238, 247
+CMYK 6, 4, 0, 3
+#E8EEF7
+
+White
+RGB 255, 255, 255
+CMYK 0, 0, 0, 0
+#FFFFFF
+
+Motifs
+
+Striped line of Marine Blue, Celtic Blue, and Alice Blue that runs across the car livery
+
+Fonts
+"Serifa Std"
+"Alegreya Sans"
+"Yale 2024"
+"YaleDisplay"
