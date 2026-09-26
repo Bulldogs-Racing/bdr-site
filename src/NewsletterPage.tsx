@@ -1,9 +1,13 @@
 import Navbar from './Navbar'
+import newsletterIssues from './newsletterIssues.json'
 import './App.css'
 import './NewsletterPage.css'
 
 const signupUrl = 'https://bulldogsracing.us13.list-manage.com/subscribe/post?u=f8635335d40768a5eea1d3406&id=a1ffae1b07&f_id=00f82aeaf0'
 const archiveUrl = 'https://us13.campaign-archive.com/home/?u=f8635335d40768a5eea1d3406&id=a1ffae1b07'
+const issueDate = new Intl.DateTimeFormat('en-US', {
+  month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC',
+})
 
 export default function NewsletterPage() {
   return (
@@ -61,11 +65,20 @@ export default function NewsletterPage() {
             Open archive in a new tab <span aria-hidden="true">↗</span>
           </a>
         </header>
-        <iframe className="newsletter-page__archive-frame" src={archiveUrl}
-          title="Bulldogs Racing newsletter archive" loading="lazy" />
+        <ul className="newsletter-page__issues">
+          {newsletterIssues.map((issue) => (
+            <li key={issue.url}>
+              <a href={issue.url} target="_blank" rel="noopener noreferrer">
+                <time dateTime={issue.date}>{issueDate.format(new Date(issue.date))}</time>
+                <span className="newsletter-page__issue-title">{issue.title}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
         <p className="newsletter-page__note">
-          Archive not loading? <a href={archiveUrl} target="_blank" rel="noopener noreferrer">
-            Read our past issues on Mailchimp <span aria-hidden="true">↗</span>
+          Issues open in a new tab. <a href={archiveUrl} target="_blank" rel="noopener noreferrer">
+            View the latest archive on Mailchimp <span aria-hidden="true">↗</span>
           </a>
         </p>
       </section>
