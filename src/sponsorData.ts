@@ -13,6 +13,7 @@ import goTime from './assets/sponsors/go-time.png'
 import onlineMetals from './assets/sponsors/online-metals.png'
 import bild from './assets/sponsors/bild.png'
 import rigol from './assets/sponsors/rigol.png'
+import titanCircuits from './assets/sponsors/titan.png'
 
 export interface Sponsor {
   id: string
@@ -22,7 +23,7 @@ export interface Sponsor {
 }
 
 // Source: https://bulldogsracing.com/sponsorship (September 22, 2026).
-// Add/remove/reorder objects here to maintain the current sponsor grid.
+// Add/remove objects here; the current sponsor grid is sorted by name below.
 export const sponsorSeason = 'BR25'
 export const sponsorshipPacket = {
   label: '2026–2027 Sponsorship Packet',
@@ -45,7 +46,8 @@ export const currentSponsors: Sponsor[] = [
   { id: 'online-metals', name: 'OnlineMetals', logo: onlineMetals, url: 'https://www.onlinemetals.com/' },
   { id: 'bild', name: 'Bild', logo: bild, url: 'https://www.getbild.com/' },
   { id: 'rigol', name: 'RIGOL', logo: rigol, url: 'https://www.rigolna.com/' },
-]
+  { id: 'titan-circuits', name: 'Titan Circuits', logo: titanCircuits, url: 'https://pcbassembly.com/' },
+].sort((a, b) => a.name.localeCompare(b.name, 'en'))
 
 export const individualSupporters = [
   'The Fernandes Family',

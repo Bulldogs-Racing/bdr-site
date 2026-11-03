@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Navbar from './Navbar'
-import background from './assets/background.png'
-import car from './assets/car.png'
+import car from './assets/car no background.png'
 import sponsorsPromo from './assets/sponsors.jpg'
 import history2007 from './assets/history/2007.jpg'
 import history2008 from './assets/history/2008-edited.jpg'
@@ -69,9 +68,6 @@ function App() {
     }
   })
   const [introVisible, setIntroVisible] = useState(!introComplete)
-  const carRef = useRef<SVGGElement>(null)
-  const trackFrameRef = useRef<HTMLDivElement>(null)
-  const sceneRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -105,67 +101,6 @@ function App() {
     }
   }, [introComplete])
 
-  useEffect(() => {
-    let frameId = 0
-    let progress = 0
-    let previousTime = 0
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-
-    const updateCarPosition = (now: number) => {
-      frameId = 0
-      const scene = sceneRef.current
-      const frame = trackFrameRef.current
-      if (!scene || !frame || !carRef.current) return
-
-      const elapsed = previousTime ? Math.min(now - previousTime, 64) : 16
-      previousTime = now
-      const animationDistance = scene.offsetHeight - frame.offsetHeight
-      const target = Math.min(Math.max(
-        -scene.getBoundingClientRect().top / Math.max(animationDistance, 1),
-        0,
-      ), 1)
-
-      progress = reducedMotion.matches ? target
-        : progress + (target - progress) * (1 - Math.exp(-elapsed / 100))
-      if (Math.abs(target - progress) < 0.0001) progress = target
-      // Let the car settle before fading in a stationary caption above it.
-      const carProgress = reducedMotion.matches ? 1 : Math.min(progress / 0.55, 1)
-      const captionProgress = reducedMotion.matches ? 1 : Math.min(Math.max((progress - 0.62) / 0.16, 0), 1)
-      frame.style.setProperty('--caption-opacity', `${captionProgress * captionProgress * (3 - 2 * captionProgress)}`)
-      // Account for the SVG's centered crop when positioning above the parked car.
-      const scale = Math.max(frame.clientWidth / 1536, frame.clientHeight / 1024)
-      const parkedCarTop = (frame.clientHeight - 1024 * scale) / 2 + 460 * scale
-      frame.style.setProperty('--parked-car-top', `${parkedCarTop}px`)
-      const inverse = 1 - carProgress
-      // Tire contact point follows a cubic spline in the background's 1536 × 1024 space.
-      const x = inverse ** 3 * 1850 + 3 * inverse ** 2 * carProgress * 1450 +
-        3 * inverse * carProgress ** 2 * 1050 + carProgress ** 3 * 768
-      const y = inverse ** 3 * 880 + 3 * inverse ** 2 * carProgress * 850 +
-        3 * inverse * carProgress ** 2 * 700 + carProgress ** 3 * 700
-      carRef.current.setAttribute('transform', `translate(${x} ${y})`)
-
-      if (!reducedMotion.matches && progress !== target) {
-        frameId = window.requestAnimationFrame(updateCarPosition)
-      }
-    }
-
-    const requestUpdate = () => {
-      if (!frameId) frameId = window.requestAnimationFrame(updateCarPosition)
-    }
-
-    requestUpdate()
-    window.addEventListener('scroll', requestUpdate, { passive: true })
-    window.addEventListener('resize', requestUpdate)
-    reducedMotion.addEventListener('change', requestUpdate)
-
-    return () => {
-      window.cancelAnimationFrame(frameId)
-      window.removeEventListener('scroll', requestUpdate)
-      window.removeEventListener('resize', requestUpdate)
-      reducedMotion.removeEventListener('change', requestUpdate)
-    }
-  }, [])
-
   return (
     <main className="home">
       <section className="home__hero">
@@ -186,30 +121,35 @@ function App() {
           <p>Formula SAE @ <span className="home__yale">Yale University</span></p>
         </div>
       </section>
-      <section
-        ref={sceneRef}
-        className="track-scene"
-      >
-        <div ref={trackFrameRef} className="track-scene__frame">
-          <svg className="track-scene__artwork" viewBox="0 0 1536 1024"
-            preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <image href={background} className="track-scene_car" width="1536" height="1024" />
-          </svg>
-          <div className="track-scene__caption">
-            <h2 className="track-scene__model">BR25</h2>
-            <p className="track-scene__description">
-              Our latest all-electric Formula SAE car, designed and built by
-              Yale students.
-            </p>
-            <p className="track-scene__result">BR25 finished <strong>6th overall out of 21 teams</strong>.</p>
-            <p className="track-scene__result">It was one of just four cars to complete every event.</p>
+      <section className="car-showcase" aria-labelledby="car-title">
+        <header className="car-showcase__header">
+          <div>
+            <p className="car-showcase__eyebrow">Student built. Track proven.</p>
+            <h2 id="car-title">BR25<span>.</span></h2>
           </div>
-          <svg className="track-scene__artwork track-scene__car-layer" viewBox="0 0 1536 1024"
-            preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <g ref={carRef} transform="translate(1850 880)">
-              <image href={car} x="-220" y="-240" width="440" height="250" />
-            </g>
-          </svg>
+          <p className="car-showcase__description">
+            Our latest all-electric Formula SAE car,<br className="car-showcase__break" /> designed and built by Yale students.
+          </p>
+        </header>
+        <div className="car-showcase__stage">
+          <span className="car-showcase__wordmark" aria-hidden="true">BULLDOGS</span>
+          <img className="car-showcase__car" src={car}
+            alt="BR25, Yale’s blue and white all-electric Formula SAE race car"
+            loading="lazy" width="2000" height="1125" />
+        </div>
+        <div className="car-showcase__results">
+          <div className="car-showcase__venue">
+            <p className="car-showcase__eyebrow">Competition results</p>
+            <p>New Hampshire</p>
+          </div>
+          <div className="car-showcase__stat">
+            <p className="car-showcase__number">6<span>th</span></p>
+            <p>Overall finish<span>Out of 21 teams</span></p>
+          </div>
+          <div className="car-showcase__stat">
+            <p className="car-showcase__number">1<span>of 4</span></p>
+            <p>Completed every event<span>One of just four cars</span></p>
+          </div>
         </div>
       </section>
       <section id="history" className="history" aria-labelledby="history-title">
@@ -245,7 +185,7 @@ function App() {
           loading="lazy" width="2000" height="1333" />
         <div className="sponsor-callout__content">
           <p className="sponsor-callout__eyebrow">Build the next generation</p>
-          <h2 id="sponsor-title">Help drive us forward.</h2>
+          <h2 id="sponsor-title">Support Us!</h2>
           <p>
             We’re Bulldogs Racing, Yale’s student team designing, building, and
             racing cars. Your support turns hands-on engineering into the next
