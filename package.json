@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/sync-newsletters.mjs --allow-stale",
     "dev": "vite",
+    "prebuild": "node scripts/sync-newsletters.mjs --allow-stale",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "newsletter:sync": "node scripts/sync-newsletters.mjs",
+    "test:newsletter": "node --test scripts/sync-newsletters.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
