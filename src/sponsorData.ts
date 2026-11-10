@@ -29,19 +29,19 @@ export const sponsorshipPacket = {
 
 export const currentSponsors: Sponsor[] = [
   { id: 'tesla', name: 'Tesla', logo: tesla, url: 'https://www.tesla.com/' },
+  { id: 'solidworks', name: 'SOLIDWORKS', logo: solidworks, url: 'https://www.solidworks.com/' },
+  { id: 'gene-haas', name: 'Gene Haas Foundation', logo: geneHaas, url: 'https://www.ghaasfoundation.org/' },
   { id: 'yale-engineering', name: 'Yale School of Engineering & Applied Science', logo: yaleEngineering, url: 'https://engineering.yale.edu/' },
+  { id: 'hoosier', name: 'Hoosier Racing Tire', logo: hoosier, url: 'https://www.hoosiertire.com/' },
+  { id: 'rigol', name: 'RIGOL', logo: rigol, url: 'https://www.rigolna.com/' },
+  { id: 'online-metals', name: 'OnlineMetals', logo: onlineMetals, url: 'https://www.onlinemetals.com/' },
+  { id: 'yale-city', name: 'Tsai Center for Innovative Thinking at Yale', logo: yaleCity, url: 'https://city.yale.edu/' },
+  { id: 'titan-circuits', name: 'Titan Circuits', logo: titanCircuits, url: 'https://pcbassembly.com/' },
+  { id: 'bild', name: 'Bild', logo: bild, url: 'https://www.getbild.com/' },
+  { id: 'go-time', name: 'GO TIME', logo: goTime, url: 'https://gotime.us/' },
   { id: 'ysea', name: 'Yale Science and Engineering Association', logo: ysea, url: 'https://ysea.org/' },
   { id: 'yceds', name: 'Yale Undergraduate Chemical Engineering Design Society', logo: yceds, url: 'https://yaleconnect.yale.edu/yceds/home/' },
-  { id: 'yale-city', name: 'Tsai Center for Innovative Thinking at Yale', logo: yaleCity, url: 'https://city.yale.edu/' },
-  { id: 'gene-haas', name: 'Gene Haas Foundation', logo: geneHaas, url: 'https://www.ghaasfoundation.org/' },
-  { id: 'solidworks', name: 'SOLIDWORKS', logo: solidworks, url: 'https://www.solidworks.com/' },
-  { id: 'hoosier', name: 'Hoosier Racing Tire', logo: hoosier, url: 'https://www.hoosiertire.com/' },
-  { id: 'go-time', name: 'GO TIME', logo: goTime, url: 'https://gotime.us/' },
-  { id: 'online-metals', name: 'OnlineMetals', logo: onlineMetals, url: 'https://www.onlinemetals.com/' },
-  { id: 'bild', name: 'Bild', logo: bild, url: 'https://www.getbild.com/' },
-  { id: 'rigol', name: 'RIGOL', logo: rigol, url: 'https://www.rigolna.com/' },
-  { id: 'titan-circuits', name: 'Titan Circuits', logo: titanCircuits, url: 'https://pcbassembly.com/' },
-].sort((a, b) => a.name.localeCompare(b.name, 'en'))
+]
 
 export const individualSupporters = [
   'The Fernandes Family',
