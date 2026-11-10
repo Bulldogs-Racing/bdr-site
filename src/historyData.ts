@@ -5,6 +5,7 @@ import car2013 from './assets/history/2013.jpg'
 import car2014 from './assets/history/2014-768x619.jpg'
 import car2016 from './assets/history/2016.jpg'
 import car2020 from './assets/history/2020.jpg'
+import car2025 from './assets/history/2025.jpg'
 
 // Archive sources, retained for future updates:
 // https://bulldogsracing.com/team-history
@@ -86,7 +87,7 @@ export const previousCars = [
   },
   {
     // TODO: placeholder image (BR20 photo) — replace with a BR25 photo
-    year: '2025', image: car2020, alt: 'The BR25 electric race car',
+    year: '2025', image: car2025, alt: 'The BR25 electric race car',
     paragraphs: [
       'BR25 was built upon the lessons learned from BR20’s return to competition. The cooling system, chassis, suspension and bodywork have all been refined with reliability and safety in mind, including a custom carbon-fiber air duct to cool the motor controller and a full composite bodywork package designed and manufactured in-house.',
       'On the electrical side, it features custom PCBs for battery temperature and voltage monitoring, CANbus communication across every electrical module, live telemetry to the pit wall, and motor firmware rewritten from scratch.',
