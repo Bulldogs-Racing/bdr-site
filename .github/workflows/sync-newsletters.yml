@@ -1,0 +1,45 @@
+name: Sync newsletter archive
+
+on:
+  schedule:
+    - cron: '23 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-newsletters
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Test sync behavior
+        run: npm run test:newsletter
+      - name: Fetch published issues
+        run: npm run newsletter:sync
+      - name: Commit changed archive
+        run: |
+          if git diff --quiet -- src/newsletterIssues.json; then
+            echo "Newsletter archive is already up to date."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/newsletterIssues.json
+          git commit -m "Update newsletter archive"
+          git push origin "HEAD:${DEFAULT_BRANCH}"
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
