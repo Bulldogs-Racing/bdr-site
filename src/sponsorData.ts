@@ -20,7 +20,7 @@ export interface Sponsor {
 
 // Source: https://bulldogsracing.com/sponsorship (September 22, 2026).
 // Add/remove/reorder objects here to maintain the current sponsor grid.
-export const sponsorSeason = 'BR26'
+export const sponsorSeason = 'BR27'
 export const sponsorshipPacket = {
   label: '2026–2027 Sponsorship Packet',
   url: 'https://bulldogsracing.com/wp-content/uploads/2026/09/Bulldogs-Racing-Sponsorship-Packet-2026-2027.pdf',
