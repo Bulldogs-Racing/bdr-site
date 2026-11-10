@@ -84,4 +84,12 @@ export const previousCars = [
       'It houses an electric drive train consisting of 2 Emrax 207 motors, and a 192V, 3.6 kWh battery pack.',
     ],
   },
+  {
+    // TODO: placeholder image (BR20 photo) — replace with a BR25 photo
+    year: '2025', image: car2020, alt: 'The BR25 electric race car',
+    paragraphs: [
+      'BR25 was built upon the lessons learned from BR20’s return to competition. The cooling system, chassis, suspension and bodywork have all been refined with reliability and safety in mind, including a custom carbon-fiber air duct to cool the motor controller and a full composite bodywork package designed and manufactured in-house.',
+      'On the electrical side, it features custom PCBs for battery temperature and voltage monitoring, CANbus communication across every electrical module, live telemetry to the pit wall, and motor firmware rewritten from scratch.',
+    ],
+  },
 ]
