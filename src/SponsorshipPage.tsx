@@ -60,24 +60,23 @@ export default function SponsorshipPage() {
         <ul className="sponsor-grid">
           {currentSponsors.map((sponsor) => (
             <li key={sponsor.id}>
-              <a className="sponsor-card" href={sponsor.url}>
+              <a className={`sponsor-card sponsor-card--${sponsor.id}`} href={sponsor.url}>
                 <img src={sponsor.logo} alt="" loading="lazy" decoding="async" width="500" height="500" />
                 <span>{sponsor.name} <span aria-hidden="true">↗</span></span>
               </a>
             </li>
           ))}
         </ul>
-      </section>
-
-      <section className="sponsorship-page__supporters" aria-labelledby="supporters-title">
-        <header className="sponsorship-page__section-header">
-          <p className="sponsorship-page__eyebrow">Our community</p>
-          <h2 id="supporters-title">With special thanks.</h2>
-          <p>To the individuals and families supporting {sponsorSeason}: thank you for believing in our team.</p>
-        </header>
-        <ul className="sponsorship-page__names">
-          {individualSupporters.map((name) => <li key={name}>{name}</li>)}
-        </ul>
+        <div className="sponsorship-page__individual-sponsors" aria-labelledby="individual-sponsors-title">
+          <h3 id="individual-sponsors-title">Individual &amp; family sponsors</h3>
+          <p>
+            We also thank the following individuals and families whose generous
+            contributions help fund {sponsorSeason} and make our work possible.
+          </p>
+          <ul className="sponsorship-page__names">
+            {individualSupporters.map((name) => <li key={name}>{name}</li>)}
+          </ul>
+        </div>
       </section>
 
       <section className="sponsorship-page__previous" aria-labelledby="previous-sponsors-title">
