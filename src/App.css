@@ -206,7 +206,7 @@
   z-index: -1;
   top: 12%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(calc(-50% + -167px), 33px) perspective(900px) rotateY(40.5deg) rotateX(21deg) rotate(-2.5deg) scale(0.82);
   color: rgba(232, 238, 247, 0.045);
   font-size: clamp(60px, 15.2vw, 240px);
   font-weight: 700;
@@ -375,7 +375,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: filter 450ms ease;
 }
 
 .history-carousel__details {
@@ -407,7 +407,7 @@
 
 .history-carousel__slide:hover img,
 .history-carousel__slide:focus-visible img {
-  transform: scale(1.04);
+  filter: brightness(0.75);
 }
 
 .history-carousel__slide:hover .history-carousel__details,

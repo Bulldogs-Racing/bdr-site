@@ -86,7 +86,6 @@ export const previousCars = [
     ],
   },
   {
-    // TODO: placeholder image (BR20 photo) — replace with a BR25 photo
     year: '2025', image: car2025, alt: 'The BR25 electric race car',
     paragraphs: [
       'BR25 was built upon the lessons learned from BR20’s return to competition. The cooling system, chassis, suspension and bodywork have all been refined with reliability and safety in mind, including a custom carbon-fiber air duct to cool the motor controller and a full composite bodywork package designed and manufactured in-house.',
