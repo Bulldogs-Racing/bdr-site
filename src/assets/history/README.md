@@ -1,6 +1,6 @@
 # History photos
 
-This folder has photos of past Bulldogs Racing cars from 2007 to 2020. This folder also has the header photo for the Team History page. The filenames come from the old WordPress site's media library. The `-edited` and `-768x619` parts of some filenames come from that same source. This codebase did not create these names.
+This folder has photos of past Bulldogs Racing cars from 2007 to 2025. This folder also has the header photo for the Team History page. The filenames for 2007 through 2020 come from the old WordPress site's media library. The `-edited` and `-768x619` parts of some filenames come from that same source. This codebase did not create these names.
 
 The code imports each car photo two times. Two separate arrays use each photo. A person must keep these two arrays in sync by hand:
 - `src/historyData.ts` (`previousCars`): this array shows the full car-by-car history on the History page (`src/HistoryPage.tsx`). Each entry has several paragraphs of text.
@@ -19,11 +19,12 @@ These two arrays do not share one data source. To add or edit a car, a person mu
 | `2014-768x619.jpg` | 768×619 | 2014 | `historyData.ts` (`car2014`), `App.tsx` (`history2014`) |
 | `2016.jpg` | 768×432 | 2016 | `historyData.ts` (`car2016`), `App.tsx` (`history2016`) |
 | `2020.jpg` | 768×511 | 2020 | `historyData.ts` (`car2020`), `App.tsx` (`history2020`) |
+| `2025.jpg` | 5152×4716 | 2025 | `historyData.ts` (`car2025`), `App.tsx` (`history2025`) |
 | `team-history.jpg` | 2560×1700 | — | `HistoryPage.tsx` (`historyPhoto`) only |
 
 `team-history.jpg` is the header photo at the top of the Team History page. This photo does not show one car year.
 
-The code uses all eight files. No file in this folder is unused.
+The code uses all nine files. No file in this folder is unused.
 
 ## Notes for future changes
 
