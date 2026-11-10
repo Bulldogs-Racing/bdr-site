@@ -210,28 +210,6 @@
   text-decoration: underline;
 }
 
-.newsletter-page__footer {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px 40px;
-  padding: 48px clamp(24px, 5vw, 80px);
-  background: #002340;
-  color: #e8eef7;
-}
-
-.newsletter-page__footer p {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: 24px;
-  letter-spacing: -0.025em;
-}
-
-.newsletter-page__footer a {
-  color: inherit;
-  font-size: 14px;
-}
-
 .newsletter-page a:focus-visible,
 .newsletter-page input:focus-visible,
 .newsletter-page button:focus-visible {
@@ -239,8 +217,7 @@
   outline-offset: 5px;
 }
 
-.newsletter-page__hero a:focus-visible,
-.newsletter-page__footer a:focus-visible {
+.newsletter-page__hero a:focus-visible {
   outline-color: #fff;
 }
 

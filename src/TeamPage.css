@@ -51,8 +51,7 @@
 
 .team-page__intro,
 .team-page__sections,
-.team-page__directory,
-.team-page__footer {
+.team-page__directory {
   padding-inline: clamp(24px, 5vw, 80px);
 }
 
@@ -176,30 +175,6 @@
   color: #03366a;
   font-size: 13px;
   text-underline-offset: 4px;
-}
-
-.team-page__footer {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px 40px;
-  padding-block: 48px;
-  background: #002340;
-  color: #e8eef7;
-}
-
-.team-page__footer p {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: 24px;
-  letter-spacing: -0.025em;
-}
-
-.team-page__footer a {
-  color: inherit;
-  font-size: 14px;
-  overflow-wrap: anywhere;
-  text-underline-offset: 5px;
 }
 
 @media (max-width: 1000px) {

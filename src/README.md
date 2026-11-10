@@ -20,6 +20,18 @@ Each path list keeps old URLs from the previous WordPress site as aliases. The r
 
 ### main.tsx
 The app's entry point. It picks a page by path and renders it, as described above.
+It shows the shared footer after each page.
+
+### Footer.tsx / Footer.css
+The shared footer shows the white logo and the team name on a navy background.
+It has links to Instagram, LinkedIn, and the Yale BDR Linktree.
+The `page` prop selects the message and links for each page.
+History, Team, Sponsorship, and Newsletter use this prop.
+Their messages and links appear above the logo and social links.
+Each page has one footer after its main content.
+`Footer.css` contains all footer styles.
+The links wrap to fit small screens.
+Each link has a visible outline when it has keyboard focus.
 
 ### App.tsx
 The home page. It has the hero section, an SVG animation of the car and track, a short history preview, and a sponsor callout. It imports most of its images directly from `src/assets/` — see `src/assets/README.md`.

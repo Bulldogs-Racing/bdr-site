@@ -83,12 +83,6 @@ export default function NewsletterPage() {
         </p>
       </section>
 
-      <footer className="newsletter-page__footer">
-        <p>Be part of what’s next.</p>
-        <a href="/team">Meet the team <span aria-hidden="true">↗</span></a>
-        <a href="/sponsors">Support Bulldogs Racing <span aria-hidden="true">↗</span></a>
-        <a href="mailto:bulldogsracing@yale.edu">Get in touch <span aria-hidden="true">↗</span></a>
-      </footer>
     </main>
   )
 }

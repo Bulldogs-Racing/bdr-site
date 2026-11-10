@@ -61,11 +61,6 @@ export default function HistoryPage() {
           </div>
         </section>
       </main>
-      <footer className="history-page__footer">
-        <p>The next chapter is built together.</p>
-        <a href="/team">Meet the team ↗</a>
-        <a href="/about">Get in touch ↗</a>
-      </footer>
     </div>
   )
 }
