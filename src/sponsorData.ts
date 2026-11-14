@@ -24,7 +24,8 @@ export interface Sponsor {
 export const sponsorSeason = 'BR27'
 export const sponsorshipPacket = {
   label: '2026–2027 Sponsorship Packet',
-  url: 'https://bulldogsracing.com/wp-content/uploads/2026/09/Bulldogs-Racing-Sponsorship-Packet-2026-2027.pdf',
+  url: '/sponsorship-packet',
+  pdfUrl: '/Bulldogs%20Racing%20Sponsorship%20Packet%202026-2027.pdf',
 }
 
 export const currentSponsors: Sponsor[] = [

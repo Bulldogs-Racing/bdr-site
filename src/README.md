@@ -4,13 +4,14 @@ This folder has the app's source code. This site is a Vite + React + TypeScript 
 
 ## Routing
 
-`main.tsx` is the entry point. It reads `window.location.pathname`. It matches the path against four lists of paths, one list per page. It sets `document.title` for a match. It renders one page component. The home page (`App.tsx`) is the fallback when no path matches.
+`main.tsx` is the entry point. It reads `window.location.pathname`. It checks one list of paths for each page. It sets `document.title` for a match. It renders one page component. The home page (`App.tsx`) is the fallback when no path matches.
 
 | Path(s) | Page component | Page title |
 |---|---|---|
 | `/team`, `/leadership-team` | `TeamPage.tsx` | Our Team \| Bulldogs Racing |
 | `/history`, `/team-history`, `/the-team/previous-cars` | `HistoryPage.tsx` | Our History \| Bulldogs Racing |
 | `/sponsors`, `/sponsorship`, `/sponsorships` | `SponsorshipPage.tsx` | Sponsorships \| Bulldogs Racing |
+| `/sponsorship-packet` | `SponsorshipPacketPage.tsx` | Sponsorship Packet \| Bulldogs Racing |
 | `/about`, `/contact-us` | `AboutPage.tsx` | About & Contact \| Bulldogs Racing |
 | any other path | `App.tsx` | (unchanged — set in `index.html`) |
 
@@ -28,7 +29,7 @@ The home page. It has the hero section, an SVG animation of the car and track, a
 Shared styles. `App.tsx` and every other page (`AboutPage.tsx`, `HistoryPage.tsx`, `SponsorshipPage.tsx`, `TeamPage.tsx`) import this file. Each page then imports its own CSS file on top of this one.
 
 ### Navbar.tsx
-The site navbar. Every page renders this component. It shows the white logo and links to `/team`, `/history`, `/sponsors`, and `/about`.
+The site navbar. The PDF page does not use this component. It shows the white logo and links to `/team`, `/history`, `/sponsors`, and `/about`.
 
 ### index.css
 Global base styles. `main.tsx` imports this file once, before any page.
@@ -43,7 +44,10 @@ The Team History page. It shows a header photo, the narrative chapters from `his
 The Team page. It shows the group photo and the leadership sections and members from `teamData.ts`.
 
 ### SponsorshipPage.tsx / SponsorshipPage.css
-The Sponsorship page. It shows a header photo, a link to the sponsorship packet PDF, and the sponsor grid, individual supporters, and past sponsors from `sponsorData.ts`.
+The Sponsorship page. It shows a header photo and a link to `/sponsorship-packet`. It shows sponsors and individual supporters from `sponsorData.ts`.
+
+### SponsorshipPacketPage.tsx / SponsorshipPacketPage.css
+This page shows only the PDF at the full window size. It uses `public/Bulldogs Racing Sponsorship Packet 2026-2027.pdf`. If the browser cannot show the PDF, the page shows a direct link to it. The `sponsorshipPacket` object in `sponsorData.ts` sets the page path and the PDF path.
 
 ### historyData.ts
 Data only, no page markup. Holds `historyChapters` (narrative text for each era) and `previousCars` (one entry per car, with photos from `src/assets/history/`). See `src/assets/history/README.md` — `App.tsx` also imports these same car photos for its own short preview list, kept separately in `App.tsx` itself.
