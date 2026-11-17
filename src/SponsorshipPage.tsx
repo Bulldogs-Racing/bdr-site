@@ -94,11 +94,6 @@ export default function SponsorshipPage() {
         </ul>
       </section>
 
-      <footer className="sponsorship-page__footer">
-        <h2>Be part of what’s next.</h2>
-        <p>Interested in sponsoring the team? Get in touch for more information.</p>
-        <a href="mailto:bulldogsracing@yale.edu">bulldogsracing@yale.edu <span aria-hidden="true">↗</span></a>
-      </footer>
     </main>
   )
 }

@@ -148,7 +148,7 @@ function App() {
           </div>
           <div className="car-showcase__stat">
             <p className="car-showcase__number">1<span>of 4</span></p>
-            <p>Completed every event<span>One of just four cars</span></p>
+            <p>To complete all events<span>Out of 21 teams</span></p>
           </div>
         </div>
       </section>
