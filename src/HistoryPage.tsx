@@ -1,15 +1,34 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Navbar from './Navbar'
 import historyPhoto from './assets/history/team-history.jpg'
 import { historyChapters, previousCars } from './historyData'
 import './App.css'
 import './HistoryPage.css'
 
+// Speeds up the archive's horizontal scroll so vertical wheel/trackpad input moves it faster than the browser default.
+const SCROLL_SPEED_MULTIPLIER = 1.6
+
 export default function HistoryPage() {
+  const archiveWindowRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (window.location.pathname.replace(/\/$/, '') === '/the-team/previous-cars') {
       document.getElementById('previous-cars')?.scrollIntoView()
     }
+  }, [])
+
+  useEffect(() => {
+    const archiveWindow = archiveWindowRef.current
+    if (!archiveWindow) return
+
+    const handleWheel = (event: WheelEvent) => {
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+      archiveWindow.scrollLeft += delta * SCROLL_SPEED_MULTIPLIER
+      event.preventDefault()
+    }
+
+    archiveWindow.addEventListener('wheel', handleWheel, { passive: false })
+    return () => archiveWindow.removeEventListener('wheel', handleWheel)
   }, [])
 
   return (
@@ -46,7 +65,7 @@ export default function HistoryPage() {
             </div>
             <p>Scroll to explore <span aria-hidden="true">→</span></p>
           </header>
-          <div className="car-archive__window" role="region" aria-label="Previous cars, scroll horizontally" tabIndex={0}>
+          <div className="car-archive__window" role="region" aria-label="Previous cars, scroll horizontally" tabIndex={0} ref={archiveWindowRef}>
             <div className="car-archive__track">
               {previousCars.map((car) => (
                 <article className="car-archive__card" key={car.year} tabIndex={0} aria-labelledby={`car-${car.year}`}>

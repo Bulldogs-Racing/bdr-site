@@ -9,6 +9,7 @@ import history2013 from './assets/history/2013.jpg'
 import history2014 from './assets/history/2014-768x619.jpg'
 import history2016 from './assets/history/2016.jpg'
 import history2020 from './assets/history/2020.jpg'
+import history2025 from './assets/history/2025.jpg'
 import websiteVideo from './assets/WebsiteVideo.mp4'
 import whiteLogo from './assets/white logo no background.png'
 import './App.css'
@@ -56,6 +57,12 @@ const historySlides = [
     image: history2020,
     alt: 'Team members preparing a Yale race car',
     points: ['Pre-run preparation', 'Team at work', 'Momentum continues'],
+  },
+  {
+    year: '2025',
+    image: history2025,
+    alt: 'The BR25 electric race car',
+    points: ['All-electric powertrain', 'In-house composite bodywork', 'Built for reliability'],
   },
 ]
 
