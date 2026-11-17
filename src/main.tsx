@@ -26,7 +26,7 @@ if (isAboutPage) document.title = 'About & Contact | Bulldogs Racing'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {isAboutPage ? <AboutPage /> : isNewsletterPage ? <NewsletterPage /> : isSponsorshipPage ? <SponsorshipPage /> : isTeamPage ? <TeamPage /> : isHistoryPage ? <HistoryPage /> : <App />}
+    {isSponsorshipPacketPage ? <SponsorshipPacketPage /> : isAboutPage ? <AboutPage /> : isNewsletterPage ? <NewsletterPage /> : isSponsorshipPage ? <SponsorshipPage /> : isTeamPage ? <TeamPage /> : isHistoryPage ? <HistoryPage /> : <App />}
     <Footer page={isHistoryPage ? 'history' : isTeamPage ? 'team' : isSponsorshipPage ? 'sponsorship' : isNewsletterPage ? 'newsletter' : undefined} />
   </StrictMode>,
 )
