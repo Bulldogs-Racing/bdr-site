@@ -8,6 +8,7 @@ import SponsorshipPage from './SponsorshipPage'
 import SponsorshipPacketPage from './SponsorshipPacketPage'
 import NewsletterPage from './NewsletterPage'
 import AboutPage from './AboutPage'
+import Footer from './Footer'
 
 const historyPaths = ['/history', '/team-history', '/the-team/previous-cars']
 const isHistoryPage = historyPaths.includes(window.location.pathname.replace(/\/$/, ''))
@@ -25,6 +26,7 @@ if (isAboutPage) document.title = 'About & Contact | Bulldogs Racing'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {isSponsorshipPacketPage ? <SponsorshipPacketPage /> : isAboutPage ? <AboutPage /> : isNewsletterPage ? <NewsletterPage /> : isSponsorshipPage ? <SponsorshipPage /> : isTeamPage ? <TeamPage /> : isHistoryPage ? <HistoryPage /> : <App />}
+    {isAboutPage ? <AboutPage /> : isNewsletterPage ? <NewsletterPage /> : isSponsorshipPage ? <SponsorshipPage /> : isTeamPage ? <TeamPage /> : isHistoryPage ? <HistoryPage /> : <App />}
+    <Footer page={isHistoryPage ? 'history' : isTeamPage ? 'team' : isSponsorshipPage ? 'sponsorship' : isNewsletterPage ? 'newsletter' : undefined} />
   </StrictMode>,
 )

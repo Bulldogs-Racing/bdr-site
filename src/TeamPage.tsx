@@ -65,11 +65,6 @@ export default function TeamPage() {
         ))}
       </div>
 
-      <footer className="team-page__footer">
-        <p>Built together. Bulldogs Racing.</p>
-        <a href="mailto:bulldogsracing@yale.edu">bulldogsracing@yale.edu <span aria-hidden="true">↗</span></a>
-        <a href="/">Back to home <span aria-hidden="true">↗</span></a>
-      </footer>
     </main>
   )
 }
