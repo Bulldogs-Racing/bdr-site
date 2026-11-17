@@ -17,6 +17,7 @@ const isSponsorshipPage = ['/sponsors', '/sponsorship', '/sponsorships'].include
 const isSponsorshipPacketPage = ['/sponsorship-packet'].includes(window.location.pathname.replace(/\/$/, ''))
 const isNewsletterPage = ['/newsletter'].includes(window.location.pathname.replace(/\/$/, ''))
 const isAboutPage = ['/about', '/contact-us'].includes(window.location.pathname.replace(/\/$/, ''))
+document.title = "Bulldogs Racing"
 if (isHistoryPage) document.title = 'Our History | Bulldogs Racing'
 if (isTeamPage) document.title = 'Our Team | Bulldogs Racing'
 if (isSponsorshipPage) document.title = 'Sponsorships | Bulldogs Racing'
