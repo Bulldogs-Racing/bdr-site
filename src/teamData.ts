@@ -37,8 +37,8 @@ export const teamSections: TeamSection[] = [
     id: 'board',
     title: 'Board',
     members: [
-      { id: 'gusty-jothaprasert', name: 'Gusty Jothaprasert', role: 'Chief Engineer', image: gusty, email: 'gusty.jothaprasert@yale.edu' },
       { id: 'karen-mei', name: 'Karen Mei', role: 'Team Principal', image: karen, email: 'karen.mei@yale.edu' },
+      { id: 'gusty-jothaprasert', name: 'Gusty Jothaprasert', role: 'Chief Engineer', image: gusty, email: 'gusty.jothaprasert@yale.edu' },
       { id: 'ezra-zbar', name: 'Ezra Zbar', role: 'Project Manager', image: ezra },
       { id: 'ella-renton', name: 'Ella Renton', role: 'Business Manager', image: ella },
     ],
@@ -47,11 +47,11 @@ export const teamSections: TeamSection[] = [
     id: 'subteam-leads',
     title: 'Subteam Leads',
     members: [
-      { id: 'michael-mcclammy', name: 'Michael McClammy', role: 'Vehicle Dynamics (Unsprung) Lead', image: michael, email: 'michael.mcclammy@yale.edu' },
       { id: 'thais-burgess', name: 'Thais Burgess', role: 'Aerodynamics Lead', image: thais, email: 'thais.burgess@yale.edu' },
       { id: 'jenny-trang', name: 'Jenny Trang', role: 'Aerodynamics Lead', image: jenny, email: 'jenny.trang@yale.edu' },
       { id: 'robert-bobowski', name: 'Robert Bobowski', role: 'Mechanical Accumulator Lead', image: robert, email: 'robert.bobowski@yale.edu' },
       { id: 'swarna-navaratnam-tomayko', name: 'Swarna Navaratnam-Tomayko', role: 'Powertrain Lead', image: swarna },
+      { id: 'michael-mcclammy', name: 'Michael McClammy', role: 'Vehicle Dynamics (Unsprung) Lead', image: michael, email: 'michael.mcclammy@yale.edu' },
       { id: 'cara-wang', name: 'Cara Wang', role: 'Vehicle Dynamics (Sprung) Lead', image: cara },
       { id: 'himani-kumar', name: 'Himani Kumar', role: 'High Voltage Lead', image: himani },
       { id: 'eric-zou', name: 'Eric Zou', role: 'Software Lead', image: eric },
@@ -62,9 +62,9 @@ export const teamSections: TeamSection[] = [
     id: 'advisors',
     title: 'Advisors',
     members: [
+      { id: 'maggie-lo', name: 'Maggie Lo', role: 'Senior Advisor', image: maggie, email: 'maggie.lo@yale.edu' },
       { id: 'nora-ransibrahmanakul', name: 'Nora Ransibrahmanakul', role: 'Senior Advisor', image: nora, email: 'nora.ransibrahmanakul@yale.edu' },
       { id: 'pradyun-solai', name: 'Pradyun Solai', role: 'Senior Advisor', image: pradyun, email: 'pradyun.solai@yale.edu' },
-      { id: 'maggie-lo', name: 'Maggie Lo', role: 'Senior Advisor', image: maggie, email: 'maggie.lo@yale.edu' },
     ],
   },
 ]
